@@ -66,6 +66,16 @@ class marvelChart():
         for x in self.events:
             x.height = marvelNode.lines.index(x.line)
 
+    def checkIntersections(self):
+        x = 0
+        while x < len(self.characters)-1:
+            for y in range(x+1,len(self.characters)):
+                for i in self.characters[x].paths:
+                    for j in self.characters[y].paths:
+                        if i.crosses(j):
+                            print(i,j,'\n') ###THIS DOESNT WORK AT ALL
+            x += 1
+
     def getEvents(self):
         return self.events
     def getCharacters(self):

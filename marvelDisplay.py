@@ -10,12 +10,13 @@ class marvelDisplay():
     def __init__(self):
         self.chart = marvelChart('InputData/Order.csv', 'InputData/EdgeList.csv')
         self.master = tk.Tk()
+        self.resetButton = tk.Button(self.master,text='Refresh',command=self.resetChart)
+        self.resetButton.pack()
         self.can = tk.Canvas(self.master,width=1500,height=750)
         self.can.pack()
         self.resetChart()
-        self.chart.reorderEvents()
-        self.resetChart()
         self.master.update()
+        self.chart.checkIntersections()
 
     def plotPoints(self):
         for x in self.chart.events:
@@ -34,8 +35,9 @@ class marvelDisplay():
         self.can.destroy()
         self.can = tk.Canvas(self.master,width=1500,height=750)
         self.can.pack()
-        self.plotPoints()
+        self.chart.reorderEvents()
         self.plotLines()
+        self.plotPoints()
         self.master.update()
 
 a = marvelDisplay()
